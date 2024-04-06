@@ -209,9 +209,9 @@ class MeasureViewState extends State<MeasureView> {
                             },
                             child: const Row(children: [
                               Text(
-                                'I have boyfriend',
+                                'DisConnected',
                                 style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 17,
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600),
                               ),

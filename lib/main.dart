@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
-          home: uId == null ? const LoginView() : const MainPage()),
+          home: const MainPage()),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_app/constants/constant.dart';
 import 'package:project_app/core/helper/dio_helper.dart';
 import 'package:project_app/logic/cubit/auth_cubit/chatbot_cubit/chatbot_state.dart';
 import 'package:project_app/logic/data/models/massage_model.dart';
@@ -28,6 +27,8 @@ class ChatBotCubit extends Cubit<ChatBotStates> {
   }
 
   Future<void> chatBotMassage(String message, String dateTime) async {
+    const apiKey = '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';
+
     const url = 'https://api.openai.com/v1/chat/completions';
 
     final body = {

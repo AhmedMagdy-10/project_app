@@ -21,24 +21,24 @@ void main() async {
   DioHelper.init();
   Bloc.observer = Observer();
   await CacheHelper.init();
-  uId = await CacheHelper.getSaveData(key: 'uId');
+  // uId = await CacheHelper.getSaveData(key: 'uId');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(MyApp(
-    uId: uId,
-  ));
+      // uId: uId,
+      ));
   Bloc.observer = Observer();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.uId,
+    // required this.uId,
   });
 
-  final String? uId;
+  // final String? uId;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

@@ -64,27 +64,6 @@ class MeasureViewState extends State<MeasureView> {
     }
   }
 
-  // void _startListening() {
-  //   connection!.input?.listen((Uint8List data) {
-  //     String message = String.fromCharCodes(data);
-  //     print('Received message: $message');
-  //     // Handle received message
-  //   }).onDone(() {
-  //     disconnectFromESP32();
-  //   });
-  // }
-
-  // void sendData(String data) {
-  //   if (connection != null && isConnected) {
-  //     connection!.output.add(utf8.encode(data));
-  //     connection!.output.allSent.then((_) {
-  //       print('Sent message: $data');
-  //       // Handle sent message
-  //     });
-  //   } else {
-  //     print('Not connected to ESP32');
-  //   }
-  // }
   void sendData(String data, Function(String) onReceivedMessage) {
     if (connection != null && isConnected) {
       setState(() {
@@ -128,13 +107,11 @@ class MeasureViewState extends State<MeasureView> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainCubitStates>(builder: (context, state) {
       final userModel = BlocProvider.of<MainCubit>(context).userModel;
-      if (userModel != null) {
+      if (userModel == null) {
         return Scaffold(
             appBar: AppBar(
               toolbarHeight: 85,
-              title: ImageAvater(
-                model: userModel,
-              ),
+              title: const ImageAvater(),
             ),
             body: Padding(
               padding: const EdgeInsets.all(16),
@@ -146,35 +123,43 @@ class MeasureViewState extends State<MeasureView> {
                       width: double.infinity,
                       height: 200,
                     ),
-
-                    Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            receivedMessage,
-                            style: const TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            'Bp/m',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ]),
                     isSendingData
-                        ? const CircularProgressIndicator()
-                        : const Text(
-                            'Rate nummber',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                        ? const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(
+                                color: Colors.blue,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text('الصبر جميل',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ))
+                            ],
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                                Text(
+                                  receivedMessage,
+                                  style: const TextStyle(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  'Bp/m',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                              ]),
+
                     const SizedBox(
                       height: 20,
                     ),
@@ -370,86 +355,3 @@ class DeviceListPageState extends State<DeviceListPage> {
     );
   }
 }
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:project_app/logic/cubit/measure_cubit/measure_cubit.dart';
-// import 'package:project_app/logic/cubit/measure_cubit/measure_states.dart';
-
-// class MeasureView extends StatefulWidget {
-
-//   const MeasureView({super.key});
-
-//   @override
-//   State<MeasureView> createState() => _MeasureViewState();
-// }
-
-// class _MeasureViewState extends State<MeasureView> {
-//   final MeasureCubit measureCubit = MeasureCubit();
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     measureCubit.initBluetooth();
-//   }
-
-//   @override
-//   void dispose() {
-//     measureCubit.close();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//         title: const Text('Measure page'),
-//       ),
-//       body: BlocBuilder<MeasureCubit, MeasureState>(
-//         bloc: measureCubit,
-//         builder: (context, state) {
-//           if (state is MeasureConnected) {
-//             return buildConnectedUI(context);
-//           } else if (state is MeasureReceivedMessage) {
-//             final receivedMessage = state.message;
-//             // Handle received message
-//             return Text(receivedMessage);
-//           } else {
-//             return buildDisconnectedUI(context);
-//           }
-//         },
-//       ),
-//     );
-//   }
-
-//   Widget buildConnectedUI(BuildContext context) {
-//     return Center(
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           ElevatedButton(
-//             onPressed: () => measureCubit.sendData('start'),
-//             child: const Text('Start'),
-//           ),
-//           const SizedBox(height: 16),
-//           ElevatedButton(
-//             onPressed: () => measureCubit.disconnectFromESP32(),
-//             child: const Text('Disconnect from ESP32'),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//   Widget buildDisconnectedUI(BuildContext context) {
-//     return Center(
-//       child: ElevatedButton(
-//         onPressed: () => measureCubit.connectToESP32(),
-//         child: const Text('Connect to ESP32'),
-//       ),
-//     );
-//   }
-// }

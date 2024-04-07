@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project_app/constants/cache.dart';
 import 'package:project_app/core/helper/cache_helper.dart';
 import 'package:project_app/design/view/chat_view.dart';
@@ -49,5 +52,20 @@ class MainCubit extends Cubit<MainCubitStates> {
   void changeView(int index) {
     currentIndex = index;
     emit(ChangePages());
+  }
+
+  File? profileImage;
+  var picker = ImagePicker();
+  Future<void> getProfileImage(String massage) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      profileImage = File(pickedFile.path);
+
+      emit(UploadProfileImageSuccess(massage: massage));
+      print(pickedFile.path);
+    } else {
+      print('No image selected');
+      emit(UploadProfileImageFailed(massage: massage));
+    }
   }
 }

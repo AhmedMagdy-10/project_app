@@ -13,3 +13,15 @@ class MainErrorState extends MainCubitStates {
 class MainLoadingState extends MainCubitStates {}
 
 class ChangePages extends MainCubitStates {}
+
+class UploadProfileImageSuccess extends MainCubitStates {
+  final String massage;
+
+  UploadProfileImageSuccess({required this.massage});
+}
+
+class UploadProfileImageFailed extends MainCubitStates {
+  final String massage;
+
+  UploadProfileImageFailed({required this.massage});
+}

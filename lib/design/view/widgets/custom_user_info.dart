@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_app/logic/data/models/user_model.dart';
 
 class ImageAvater extends StatelessWidget {
   const ImageAvater({
@@ -10,21 +9,21 @@ class ImageAvater extends StatelessWidget {
     this.image,
     this.networkImage,
     this.radiusOfCircle,
-    required this.model,
+    // required this.model,
   });
   final String? bottomLabelText;
   final File? image;
   final String? networkImage;
   final double? radiusOfCircle;
-  final UserModel model;
+  // final UserModel model;
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      CircleAvatar(
+      const CircleAvatar(
         radius: 28,
         backgroundImage: AssetImage(
-          model.image,
-        ),
+            // model.image,
+            'assets/images/WhatsApp Image 2024-03-14 at 23.00.08_d294abd2.jpg'),
       ),
       const SizedBox(
         width: 15,
@@ -33,16 +32,16 @@ class ImageAvater extends StatelessWidget {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            model.name,
+          const Text(
+            'Ahmed Magdy',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
-          Text('age ' "${model.age}",
+          Text('age ' "22",
               style: Theme.of(context)
                   .textTheme
                   .bodySmall!

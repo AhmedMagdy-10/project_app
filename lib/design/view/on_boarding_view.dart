@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_app/constants/constant.dart';
 import 'package:project_app/design/view/login_view.dart';
 import 'package:project_app/design/view/widgets/build_onboarding_item.dart';
-import 'package:project_app/logic/data/onborading_list.dart';
+import 'package:project_app/logic/data/localData/onborading_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingView extends StatefulWidget {

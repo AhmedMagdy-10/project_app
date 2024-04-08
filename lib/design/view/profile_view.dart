@@ -26,41 +26,73 @@ class ProfileView extends StatelessWidget {
               child: SizedBox(
                 height: 200,
                 child: Stack(
-                  alignment: Alignment.bottomCenter,
+                  alignment: Alignment.topCenter,
                   children: [
-                    const CircleAvatar(
-                      radius: 68,
-                      backgroundColor: Colors.grey,
-                      child: CircleAvatar(
-                        radius: 67,
-                        backgroundColor: Colors.white,
-                        child: CircleAvatar(
-                          radius: 63,
+                    Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        const CircleAvatar(
+                          radius: 68,
                           backgroundColor: Colors.grey,
                           child: CircleAvatar(
-                              radius: 62,
-                              backgroundColor: Colors.white,
+                            radius: 67,
+                            backgroundColor: Colors.white,
+                            child: CircleAvatar(
+                              radius: 63,
+                              backgroundColor: Colors.grey,
                               child: CircleAvatar(
-                                radius: 59,
-                                backgroundImage: AssetImage(
-                                    'assets/images/WhatsApp Image 2024-03-14 at 23.00.08_d294abd2.jpg'),
-                              )),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          radius: 20,
-                          child: Icon(
-                            IconBroken.Camera,
-                            size: 20,
+                                  radius: 62,
+                                  backgroundColor: Colors.white,
+                                  child: CircleAvatar(
+                                    radius: 59,
+                                    backgroundImage: AssetImage(
+                                        'assets/images/WhatsApp Image 2024-03-14 at 23.00.08_d294abd2.jpg'),
+                                  )),
+                            ),
                           ),
-                        )),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const CircleAvatar(
+                              backgroundColor: Colors.blue,
+                              radius: 14,
+                              child: Icon(
+                                IconBroken.Camera,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            )),
+                      ],
+                    ),
+                    const Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Ahmed Magdy',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          'bebo332002@gmail.com',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),

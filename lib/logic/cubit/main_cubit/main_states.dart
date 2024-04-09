@@ -14,14 +14,28 @@ class MainLoadingState extends MainCubitStates {}
 
 class ChangePages extends MainCubitStates {}
 
-class UploadProfileImageSuccess extends MainCubitStates {
-  final String massage;
+class GetProfileImageSuccess extends MainCubitStates {}
 
-  UploadProfileImageSuccess({required this.massage});
+class GetProfileImageFailed extends MainCubitStates {}
+
+class UploadImageLoadingState extends MainCubitStates {}
+
+class UploadImageSucessState extends MainCubitStates {}
+
+class UploadImageErrorState extends MainCubitStates {
+  final String error;
+
+  UploadImageErrorState(
+    this.error,
+  );
 }
 
-class UploadProfileImageFailed extends MainCubitStates {
-  final String massage;
+class UpdateUserDataLoading extends MainCubitStates {}
 
-  UploadProfileImageFailed({required this.massage});
+class UpdateUserDataSuccess extends MainCubitStates {}
+
+class UpdateUserDataError extends MainCubitStates {
+  final String error;
+
+  UpdateUserDataError({required this.error});
 }

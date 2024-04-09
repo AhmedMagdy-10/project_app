@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/constants/cache.dart';
 import 'package:project_app/constants/constant.dart';
 import 'package:project_app/design/view/login_view.dart';
+import 'package:project_app/design/view/main_page.dart';
 import 'package:project_app/design/view/widgets/build_onboarding_item.dart';
 import 'package:project_app/logic/data/localData/onborading_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -72,11 +74,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     ),
                     onPressed: () {
                       if (isLast) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginView(),
-                            ));
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) {
+                            return uId != null
+                                ? const MainPage()
+                                : const LoginView();
+                          },
+                        ));
                       } else {
                         boardcontroller.nextPage(
                             duration: const Duration(milliseconds: 750),

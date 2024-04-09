@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/constants/icon_broken.dart';
+import 'package:project_app/logic/data/localData/profile_feature_list.dart';
+import 'package:project_app/logic/data/models/profile_model.dart';
 
 class ProfileFeatureItem extends StatelessWidget {
-  const ProfileFeatureItem({super.key});
+  const ProfileFeatureItem({super.key, required this.model});
 
+  final ProfileFeatureItemModel model;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -13,14 +16,14 @@ class ProfileFeatureItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: model.colorsContainer,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(8),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
               child: Icon(
-                IconBroken.Lock,
-                color: Colors.white,
+                model.featureIcon,
+                color: model.colorsIcon,
                 size: 35,
               ),
             ),
@@ -28,10 +31,10 @@ class ProfileFeatureItem extends StatelessWidget {
           const SizedBox(
             width: 15,
           ),
-          const Expanded(
+          Expanded(
             child: Text(
-              'Toxic Team',
-              style: TextStyle(
+              model.text!,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Color(0xffA1A1A1),
@@ -46,5 +49,25 @@ class ProfileFeatureItem extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class FeatureItemList extends StatelessWidget {
+  const FeatureItemList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return ProfileFeatureItem(
+            model: featureItem[index],
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(
+              height: 15,
+            ),
+        itemCount: featureItem.length);
   }
 }

@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_app/constants/cache.dart';
 import 'package:project_app/core/helper/cache_helper.dart';
+import 'package:project_app/core/helper/show_toast_state.dart';
 import 'package:project_app/design/view/chat_view.dart';
 import 'package:project_app/design/view/history_view.dart';
 import 'package:project_app/design/view/measure_view.dart';
@@ -56,16 +59,63 @@ class MainCubit extends Cubit<MainCubitStates> {
 
   File? profileImage;
   var picker = ImagePicker();
-  Future<void> getProfileImage(String massage) async {
+
+  Future<void> getProfileImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       profileImage = File(pickedFile.path);
 
-      emit(UploadProfileImageSuccess(massage: massage));
+      emit(GetProfileImageSuccess());
       print(pickedFile.path);
     } else {
       print('No image selected');
-      emit(UploadProfileImageFailed(massage: massage));
+      emit(GetProfileImageFailed());
     }
+  }
+
+  void upDateProfileImage({
+    String? image,
+  }) {
+    emit(UploadImageLoadingState());
+    if (profileImage != null) {
+      FirebaseStorage.instance
+          .ref()
+          .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
+          .putFile(profileImage!)
+          .then((value) {
+        value.ref.getDownloadURL().then((value) {
+          updateUser(image: value);
+          emit(UploadImageSucessState());
+        }).catchError((error) {
+          showToast(text: error.toString(), state: error);
+          emit(UploadImageErrorState(error.toString()));
+          print(error.toString());
+        });
+      }).catchError((error) {
+        emit(UploadImageErrorState(error.toString()));
+        print('error = ${error.toString()}');
+      });
+    }
+  }
+
+  void updateUser({String? image}) {
+    UserModel model = UserModel(
+        name: userModel!.name,
+        email: userModel!.email,
+        phone: userModel!.phone,
+        uId: userModel!.uId,
+        image: image ?? userModel!.image,
+        age: userModel!.age);
+    emit(UpdateUserDataLoading());
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .update(model.toMap())
+        .then((value) {
+      getUserData();
+      emit(UpdateUserDataSuccess());
+    }).catchError((error) {
+      emit(UpdateUserDataError(error: error.toString()));
+    });
   }
 }

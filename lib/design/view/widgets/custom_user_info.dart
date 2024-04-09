@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app/constants/cache.dart';
+import 'package:project_app/logic/data/models/user_model.dart';
 
 class ImageAvater extends StatelessWidget {
   const ImageAvater({
@@ -9,21 +12,19 @@ class ImageAvater extends StatelessWidget {
     this.image,
     this.networkImage,
     this.radiusOfCircle,
-    // required this.model,
+    required this.model,
   });
   final String? bottomLabelText;
   final File? image;
   final String? networkImage;
   final double? radiusOfCircle;
-  // final UserModel model;
+  final UserModel model;
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      const CircleAvatar(
+      CircleAvatar(
         radius: 28,
-        backgroundImage: AssetImage(
-            // model.image,
-            'assets/images/WhatsApp Image 2024-03-14 at 23.00.08_d294abd2.jpg'),
+        backgroundImage: CachedNetworkImageProvider(model.image),
       ),
       const SizedBox(
         width: 15,
@@ -32,20 +33,22 @@ class ImageAvater extends StatelessWidget {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Ahmed Magdy',
+          Text(
+            model.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
-          Text('age ' "22",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .copyWith(fontSize: 14, height: 1.1)),
+          Text(
+            'age ' "${model.age}",
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(fontSize: 14, height: 1.1),
+          ),
         ],
       )),
     ]);

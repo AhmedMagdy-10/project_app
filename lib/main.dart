@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,24 +22,22 @@ void main() async {
   DioHelper.init();
   Bloc.observer = Observer();
   await CacheHelper.init();
-  // uId = await CacheHelper.getSaveData(key: 'uId');
+  uId = await CacheHelper.getSaveData(key: 'uId');
+
+  // print(uId);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp(
-      // uId: uId,
-      ));
+  runApp(const MyApp());
   Bloc.observer = Observer();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    // required this.uId,
   });
 
-  // final String? uId;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -51,16 +50,17 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Cairo',
-            brightness: Brightness.light,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.white,
-            ),
-            scaffoldBackgroundColor: Colors.white,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Cairo',
+          brightness: Brightness.light,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
           ),
-          home: const MainPage()),
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: const SplashView(),
+      ),
     );
   }
 }

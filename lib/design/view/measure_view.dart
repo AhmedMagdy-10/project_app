@@ -107,11 +107,13 @@ class MeasureViewState extends State<MeasureView> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainCubitStates>(builder: (context, state) {
       final userModel = BlocProvider.of<MainCubit>(context).userModel;
-      if (userModel == null) {
+      if (userModel != null) {
         return Scaffold(
             appBar: AppBar(
               toolbarHeight: 85,
-              title: const ImageAvater(),
+              title: ImageAvater(
+                model: userModel,
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.all(16),
@@ -120,8 +122,9 @@ class MeasureViewState extends State<MeasureView> {
                   children: [
                     Image.asset(
                       'assets/images/graph.png',
+                      fit: BoxFit.cover,
                       width: double.infinity,
-                      height: 200,
+                      height: 180,
                     ),
                     isSendingData
                         ? const Column(
@@ -277,7 +280,9 @@ class MeasureViewState extends State<MeasureView> {
             ));
       } else {
         return const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: Colors.blue,
+          ),
         );
       }
     });

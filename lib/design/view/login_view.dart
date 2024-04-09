@@ -5,7 +5,6 @@ import 'package:project_app/constants/constant.dart';
 import 'package:project_app/constants/validator.dart';
 import 'package:project_app/core/helper/cache_helper.dart';
 import 'package:project_app/core/helper/show_toast_state.dart';
-import 'package:project_app/design/view/chat_view.dart';
 import 'package:project_app/design/view/main_page.dart';
 import 'package:project_app/design/view/register_view.dart';
 import 'package:project_app/design/view/widgets/custom_button.dart';

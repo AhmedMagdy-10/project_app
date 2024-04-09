@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:project_app/constants/cache.dart';
 import 'package:project_app/logic/data/models/user_model.dart';
 
 class ImageAvater extends StatelessWidget {

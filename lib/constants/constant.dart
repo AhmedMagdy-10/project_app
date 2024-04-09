@@ -5,6 +5,14 @@ const kprimaryColor = Color(0xff164863);
 const primaryColor = Color(0xff2B475E);
 const chatMassage = Color(0xff006D84);
 
+List<Color> kColors = const [
+  Color.fromARGB(255, 74, 172, 49),
+  Color.fromARGB(255, 229, 99, 82),
+  Color.fromARGB(255, 17, 100, 209),
+  Color(0xff537D8D),
+  Color(0xffD9E76C),
+];
+
 //  Color(0xff100B20);
 //  Color(0xff100B20);
 // const secondColor = Color(0xff164863);

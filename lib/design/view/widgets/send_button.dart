@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/constants/constant.dart';
+
 import 'package:project_app/constants/icon_broken.dart';
 import 'package:project_app/design/view/widgets/custom_text_field.dart';
 
@@ -22,7 +22,7 @@ class SendButton extends StatelessWidget {
         ),
         CircleAvatar(
             radius: 22,
-            backgroundColor: secondColor,
+            backgroundColor: Colors.blue,
             child: IconButton(
                 onPressed: onPressed,
                 icon: isLoading

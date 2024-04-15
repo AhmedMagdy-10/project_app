@@ -23,14 +23,13 @@ class _ChatBotState extends State<ChatBot> {
     return BlocProvider(
       create: (context) => ChatBotCubit(),
       child: Scaffold(
-          backgroundColor: const Color(0xff333333),
+          backgroundColor: const Color(0x00077777),
           appBar: AppBar(
-            backgroundColor: const Color(0xff333333),
             title: const Text(
-              'ChatBot ❤️',
+              'ChatBot 💙',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                fontWeight: FontWeight.w800,
               ),
             ),
             scrolledUnderElevation: 0,

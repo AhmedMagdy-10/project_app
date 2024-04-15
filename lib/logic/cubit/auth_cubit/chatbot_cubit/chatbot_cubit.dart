@@ -27,7 +27,7 @@ class ChatBotCubit extends Cubit<ChatBotStates> {
   }
 
   Future<void> chatBotMassage(String message, String dateTime) async {
-    const apiKey = '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';
+    const apiKey = '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';
 
     const url = 'https://api.openai.com/v1/chat/completions';
 
@@ -62,8 +62,6 @@ class ChatBotCubit extends Cubit<ChatBotStates> {
                     massage: chatBotMassage,
                     dateTime: dateTime,
                     sender: 'chatBot'));
-
-            await sentNotification(chatBotMassage);
           }
 
           emit(ChatBotSuccessState());
@@ -88,23 +86,4 @@ class ChatBotCubit extends Cubit<ChatBotStates> {
   //         print(value),
   //       });
   // }
-
-  sentNotification(String massage) async {
-    final body = {
-      'to':
-          'ePac5gmvT9uoCuOLc5bYE3:APA91bGNNO2P_lfK13ackcqzrWgHSxp7Aj-F_wHbj2HgIpeeK4zSApion8aoqJzvbdPA3Eu9mijlQcaO840Fm7Kh8WNSKX1YZx6FySy6dfiSJFwrXlJjL1PAxU4oQjsFgipmm4LiEZ94',
-      "notification": {
-        "title": "Heart Rate",
-        "body": massage,
-      }
-    };
-
-    final response = await DioHelper().postDate(
-        url: 'https://fcm.googleapis.com/fcm/send',
-        data: body,
-        token:
-            'key=AAAASoIoaeA:APA91bHqLMEwR4wSbzRTZ8K7gMnVaG1Z1-96Rcl2gEQ-DQEIBBnHbrlg1uOe51MMa8qLKjGljC0ixOxzXHDrViyxOHApn2TbC_ZHqjo5wph9-mmigv4kS7dis6u1D7_A3HfFzCGSurEK');
-
-    print(response.statusCode);
-  }
 }

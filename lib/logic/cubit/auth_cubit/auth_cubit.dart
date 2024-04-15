@@ -105,7 +105,8 @@ class AuthCubit extends Cubit<AuthState> {
       phone: phone,
       uId: uId,
       age: age,
-      image: 'assets/images/WhatsApp Image 2024-03-14 at 23.00.08_d294abd2.jpg',
+      image:
+          'https://i.pinimg.com/564x/6d/2e/a9/6d2ea995f1bd8b3896e3bfeea876be83.jpg',
     );
 
     FirebaseFirestore.instance

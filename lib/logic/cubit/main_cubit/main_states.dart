@@ -39,3 +39,13 @@ class UpdateUserDataError extends MainCubitStates {
 
   UpdateUserDataError({required this.error});
 }
+
+class LoadingUser extends MainCubitStates {}
+
+class UserSuccess extends MainCubitStates {}
+
+class UserError extends MainCubitStates {
+  final String error;
+
+  UserError({required this.error});
+}

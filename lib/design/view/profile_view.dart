@@ -26,176 +26,173 @@ class ProfileView extends StatelessWidget {
       }
     }, builder: (context, state) {
       var userModel = BlocProvider.of<MainCubit>(context).userModel;
-      var profileImage = BlocProvider.of<MainCubit>(context).profileImage;
-
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Profile',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
+      if (userModel != null) {
+        return Scaffold(
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            title: const Text(
+              'Profile',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+              ),
             ),
+            centerTitle: true,
           ),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  child: SizedBox(
-                    height: 200,
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        Stack(
-                          alignment: Alignment.bottomRight,
-                          children: [
-                            CircleAvatar(
-                              radius: 68,
-                              backgroundColor: Colors.grey,
-                              child: CircleAvatar(
-                                radius: 67,
-                                backgroundColor: Colors.white,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    child: SizedBox(
+                      height: 200,
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          Stack(
+                            alignment: Alignment.bottomRight,
+                            children: [
+                              CircleAvatar(
+                                radius: 68,
+                                backgroundColor: Colors.grey,
                                 child: CircleAvatar(
-                                  radius: 63,
-                                  backgroundColor: Colors.grey,
+                                  radius: 67,
+                                  backgroundColor: Colors.white,
                                   child: CircleAvatar(
-                                      radius: 62,
-                                      backgroundColor: Colors.white,
-                                      child: state is! UploadImageLoadingState
-                                          ? CircleAvatar(
-                                              radius: 59,
-                                              backgroundImage:
-                                                  CachedNetworkImageProvider(
-                                                userModel!.image,
-                                              ),
-                                            )
-                                          : const CircularProgressIndicator(
-                                              color: Colors.blue,
-                                            )),
+                                    radius: 63,
+                                    backgroundColor: Colors.grey,
+                                    child: CircleAvatar(
+                                        radius: 62,
+                                        backgroundColor: Colors.white,
+                                        child: state is! UploadImageLoadingState
+                                            ? CircleAvatar(
+                                                radius: 59,
+                                                backgroundImage:
+                                                    CachedNetworkImageProvider(
+                                                  userModel.image,
+                                                ),
+                                              )
+                                            : const CircularProgressIndicator(
+                                                color: Colors.blue,
+                                              )),
+                                  ),
                                 ),
                               ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  BlocProvider.of<MainCubit>(context)
-                                      .getProfileImage()
-                                      .then((_) {
-                                    print('image= $profileImage');
-
+                              IconButton(
+                                  onPressed: () {
                                     BlocProvider.of<MainCubit>(context)
-                                        .upDateProfileImage();
-                                  });
-                                },
-                                icon: const CircleAvatar(
-                                    backgroundColor: Colors.blue,
-                                    radius: 14,
-                                    child: Icon(
-                                      IconBroken.Camera,
-                                      color: Colors.white,
-                                      size: 18,
-                                    )))
-                          ],
+                                        .getProfileImage()
+                                        .then((_) {
+                                      BlocProvider.of<MainCubit>(context)
+                                          .upDateProfileImage();
+                                    });
+                                  },
+                                  icon: const CircleAvatar(
+                                      backgroundColor: Colors.blue,
+                                      radius: 14,
+                                      child: Icon(
+                                        IconBroken.Camera,
+                                        color: Colors.white,
+                                        size: 18,
+                                      )))
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    userModel.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  if (userModel.name == 'Ahmed magdy')
+                                    const Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: Colors.blue,
+                                          radius: 7,
+                                          child: Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                            size: 13,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                ],
+                              ),
+                              Text(
+                                userModel.email,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const FeatureItemList(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  CustomButton(
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Log Out',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              userModel!.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              userModel.email,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                          width: 7,
+                        ),
+                        Icon(
+                          IconBroken.Logout,
+                          color: Colors.white,
                         ),
                       ],
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const FeatureItemList(),
-                const SizedBox(
-                  height: 16,
-                ),
-                CustomButton(
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Log Out',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 7,
-                      ),
-                      Icon(
-                        IconBroken.Logout,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                  onTapButton: () {
-                    CacheHelper.removeData(key: 'uId');
-                    exit(0);
-                  },
-                )
-              ],
+                    onTapButton: () {
+                      CacheHelper.removeData(key: 'uId');
+                      exit(0);
+                    },
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      } else {
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Colors.blue,
+          ),
+        );
+      }
     });
   }
 }
-
-  // Stack(
-  //                           alignment: Alignment.bottomRight,
-  //                           children: [
-  //                             CircleAvatar(
-  //                               backgroundColor: Colors.white,
-  //                               radius: 64,
-  //                               child: customCircleAvatar(
-  //                                 radius: 60,
-  //                                 backgroundImage: profileImage == null
-  //                                     ? NetworkImage(
-  //                                         userModel.image,
-  //                                       )
-  //                                     : FileImage(profileImage),
-  //                               ),
-  //                             ),
-  //                             IconButton(
-  //                                 onPressed: () {
-  //                                   BlocProvider.of<MainSocialCubit>(context)
-  //                                       .getProfileImage();
-  //                                 },
-  //                                 icon: const CircleAvatar(
-  //                                   backgroundColor: Colors.blue,
-  //                                   radius: 20,
-  //                                   child: Icon(
-  //                                     IconBroken.Camera,
-  //                                     size: 20,
-  //                                   ),
-  //                                 )),
-  //                           ],

@@ -3,13 +3,15 @@ import 'package:project_app/constants/icon_broken.dart';
 import 'package:project_app/logic/data/models/profile_model.dart';
 
 List<ProfileFeatureItemModel> featureItem = [
-  ProfileFeatureItemModel(
-    featureIcon: IconBroken.User1,
-    colorsIcon: Colors.white,
-    colorsContainer: Colors.blue,
-    text: 'Toxic team',
-    onTap: () {},
-  ),
+  // ProfileFeatureItemModel(
+  //   featureIcon: IconBroken.User1,
+  //   colorsIcon: Colors.white,
+  //   colorsContainer: Colors.blue,
+  //   text: 'Toxic team',
+  //   onTap: () {
+
+  //   },
+  // ),
   ProfileFeatureItemModel(
     featureIcon: IconBroken.Heart,
     colorsIcon: Colors.black,

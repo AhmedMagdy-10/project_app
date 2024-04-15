@@ -22,7 +22,7 @@ class ImageAvater extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       CircleAvatar(
-        radius: 28,
+        radius: 32,
         backgroundImage: CachedNetworkImageProvider(model.image),
       ),
       const SizedBox(
@@ -32,14 +32,35 @@ class ImageAvater extends StatelessWidget {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            model.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
+          Row(
+            children: [
+              Text(
+                model.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              if (model.name == 'Ahmed magdy')
+                const Row(
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.blue,
+                      radius: 7,
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 13,
+                      ),
+                    ),
+                  ],
+                ),
+            ],
           ),
           Text(
             'age ' "${model.age}",

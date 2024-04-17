@@ -26,6 +26,7 @@ class ProfileView extends StatelessWidget {
       }
     }, builder: (context, state) {
       var userModel = BlocProvider.of<MainCubit>(context).userModel;
+      // var profileImage = ;
       if (userModel != null) {
         return Scaffold(
           appBar: AppBar(
@@ -41,6 +42,7 @@ class ProfileView extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -85,8 +87,10 @@ class ProfileView extends StatelessWidget {
                                     BlocProvider.of<MainCubit>(context)
                                         .getProfileImage()
                                         .then((_) {
-                                      BlocProvider.of<MainCubit>(context)
-                                          .upDateProfileImage();
+                                      if (state is GetProfileImageSuccess) {
+                                        BlocProvider.of<MainCubit>(context)
+                                            .upDateProfileImage();
+                                      }
                                     });
                                   },
                                   icon: const CircleAvatar(
@@ -114,7 +118,7 @@ class ProfileView extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
-                                  if (userModel.name == 'Ahmed magdy')
+                                  if (userModel.name == 'Ahmed Magdy')
                                     const Row(
                                       children: [
                                         SizedBox(

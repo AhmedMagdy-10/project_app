@@ -117,186 +117,173 @@ class MeasureViewState extends State<MeasureView> {
               ),
             ),
             body: Padding(
-              padding: const EdgeInsets.all(16),
-              child: SizedBox(
-                height: MediaQuery.sizeOf(context).height,
-                width: MediaQuery.sizeOf(context).width,
-                child: Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/graph.png',
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: 180,
-                      ),
-                      isSendingData
-                          ? const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircularProgressIndicator(
-                                  color: Colors.blue,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text('الصبر جميل',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ))
-                              ],
-                            )
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                  Text(
-                                    receivedMessage,
-                                    style: const TextStyle(
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Bp/m',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.grey[600],
-                                    ),
-                                  ),
-                                ]),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomActionButton(
-                              onTap: () {
-                                connectToESP32();
-                              },
-                              child: const Row(
+                padding: const EdgeInsets.all(16),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/graph.png',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: 180,
+                        ),
+                        isSendingData
+                            ? const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Eye contact ',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.bluetooth_connected,
-                                    size: 20,
+                                  CircularProgressIndicator(
                                     color: Colors.blue,
                                   ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('الصبر جميل',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ))
                                 ],
-                              )),
-                          CustomActionButton(
+                              )
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                    Text(
+                                      receivedMessage,
+                                      style: const TextStyle(
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Bp/m',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                  ]),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomActionButton(
+                                onTap: () {
+                                  connectToESP32();
+                                },
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Eye Contact ',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.bluetooth_connected,
+                                      size: 20,
+                                      color: Colors.blue,
+                                    ),
+                                  ],
+                                )),
+                            CustomActionButton(
+                                onTap: () {
+                                  disconnectFromESP32();
+                                },
+                                child: const Center(
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'DisConnect',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Icon(
+                                          Icons.bluetooth_disabled,
+                                          size: 20,
+                                          color: Colors.blue,
+                                        )
+                                      ]),
+                                ))
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomActionButton(
                               onTap: () {
-                                disconnectFromESP32();
+                                Future.delayed(const Duration(seconds: 10), () {
+                                  BlocProvider.of<MainCubit>(context)
+                                      .sendNotification();
+                                });
                               },
                               child: const Center(
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'have BoyFriend',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Icon(
-                                        Icons.bluetooth_disabled,
-                                        size: 18,
-                                        color: Colors.blue,
-                                      )
-                                    ]),
-                              ))
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomActionButton(
-                            onTap: () {
-                              Future.delayed(const Duration(seconds: 10), () {
-                                BlocProvider.of<MainCubit>(context)
-                                    .sendNotification();
+                                child: Text(
+                                  'HealthCare  🚑',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            CustomActionButton(
+                              onTap: () {},
+                              child: const Center(
+                                child: Text(
+                                  'Food Details 🥗',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 35,
+                        ),
+                        CustomButton(
+                          onTapButton: () {
+                            sendData('start', (receivedMessage) {
+                              setState(() {
+                                this.receivedMessage = receivedMessage;
                               });
-                            },
-                            child: const Center(
-                              child: Text(
-                                'HealthCare  🚑',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                          CustomActionButton(
-                            onTap: () {},
-                            child: const Center(
-                              child: Text(
-                                'Food Details 🥗',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     sendSM(
-                      //         'your rate is very low and you will dead after 2 second, انطق الشهاده يحج');
-                      //   },
-                      //   child: const Text(
-                      //     'I have boy friend',
-                      //     style: const TextStyle(
-                      //       color: Colors.black,
-                      //     ),
-                      //   ),
-                      // ),
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      CustomButton(
-                        onTapButton: () {
-                          sendData('start', (receivedMessage) {
-                            setState(() {
-                              this.receivedMessage = receivedMessage;
                             });
-                          });
-                        },
-                        child: const Text(
-                          'Start Measure',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
+                          },
+                          child: const Text(
+                            'Start Measure',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-            ));
+                )));
       } else {
         return const Center(
           child: CircularProgressIndicator(

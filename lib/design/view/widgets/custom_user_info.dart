@@ -43,7 +43,7 @@ class ImageAvater extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              if (model.name == 'Ahmed magdy')
+              if (model.name == 'Ahmed Magdy')
                 const Row(
                   children: [
                     SizedBox(

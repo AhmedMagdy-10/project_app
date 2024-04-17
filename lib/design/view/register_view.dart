@@ -25,7 +25,8 @@ class RegisterView extends StatelessWidget {
       listener: (context, state) {
         if (state is SuccessRegisterState) {
           return showToast(
-              text: 'مبرروك اتعملك اكونت', state: ToastStates.success);
+              text: 'Create Account Successflly,يكون فتحت الخير عليك ',
+              state: ToastStates.success);
         } else if (state is FailureRegisterState) {
           return showToast(text: state.errorMassage, state: ToastStates.error);
         }

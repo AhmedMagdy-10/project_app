@@ -106,7 +106,7 @@ class AuthCubit extends Cubit<AuthState> {
       uId: uId,
       age: age,
       image:
-          'https://i.pinimg.com/564x/6d/2e/a9/6d2ea995f1bd8b3896e3bfeea876be83.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhWhlPoW4Wpg8W4Mt5tD3d7eWnppCu-v4u9Q&usqp=CAU',
     );
 
     FirebaseFirestore.instance

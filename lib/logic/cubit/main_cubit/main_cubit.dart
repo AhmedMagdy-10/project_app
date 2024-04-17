@@ -151,6 +151,7 @@ class MainCubit extends Cubit<MainCubitStates> {
         emit(UploadImageErrorState(error.toString()));
         print('error = ${error.toString()}');
       });
+      
     }
   }
 

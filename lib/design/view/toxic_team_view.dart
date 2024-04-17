@@ -18,7 +18,7 @@ class ToxicTeamView extends StatelessWidget {
           appBar: AppBar(
             scrolledUnderElevation: 0,
             title: const Text(
-              'Team without Work',
+              'Team Without Work',
               style: TextStyle(
                 fontWeight: FontWeight.w800,
               ),
@@ -67,7 +67,7 @@ class TeamMemmberFeature extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                if (userModel.name == 'Ahmed magdy')
+                if (userModel.name == 'Ahmed Magdy')
                   const Row(
                     children: [
                       SizedBox(
@@ -86,7 +86,7 @@ class TeamMemmberFeature extends StatelessWidget {
                   ),
               ],
             ),
-            if (userModel.name == 'Ahmed magdy')
+            if (userModel.name == 'Ahmed Magdy')
               const Text(
                 'Flutter Developer',
                 maxLines: 1,
@@ -99,6 +99,16 @@ class TeamMemmberFeature extends StatelessWidget {
                 userModel.name == 'Rawan Ammer')
               const Text(
                 'UI Designer',
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+            if (userModel.name == 'Gaber Ezzat' ||
+                userModel.name == 'Hagar Saleh')
+              const Text(
+                'Hardware',
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 16,
@@ -118,8 +128,9 @@ class ListTeamMemmber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainCubitStates>(builder: (context, state) {
-      if (State is UserSuccess) {
+      if (state is! LoadingUser) {
         return ListView.separated(
+            physics: const BouncingScrollPhysics(),
             reverse: true,
             shrinkWrap: true,
             itemBuilder: (context, index) => TeamMemmberFeature(

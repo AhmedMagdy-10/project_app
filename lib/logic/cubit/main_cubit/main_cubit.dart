@@ -14,6 +14,7 @@ import 'package:project_app/core/helper/dio_helper.dart';
 import 'package:project_app/core/helper/show_toast_state.dart';
 import 'package:project_app/design/view/chat_view.dart';
 import 'package:project_app/design/view/history_view.dart';
+import 'package:project_app/design/view/inforamtion_view.dart';
 import 'package:project_app/design/view/measure_view.dart';
 import 'package:project_app/design/view/profile_view.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_states.dart';
@@ -96,15 +97,17 @@ class MainCubit extends Cubit<MainCubitStates> {
 
   List<String> title = [
     'Home',
-    'History',
+    'Inforamtion',
     'ChatBot',
+    'History',
     'Profile',
   ];
 
   List<Widget> views = [
     const MeasureView(),
-    const HistoryView(),
+    const InformationView(),
     const ChatBot(),
+    const HistoryView(),
     const ProfileView(),
   ];
 
@@ -151,7 +154,6 @@ class MainCubit extends Cubit<MainCubitStates> {
         emit(UploadImageErrorState(error.toString()));
         print('error = ${error.toString()}');
       });
-      
     }
   }
 

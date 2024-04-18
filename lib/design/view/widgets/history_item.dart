@@ -57,7 +57,7 @@ class HistoryItem extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(right: 24),
           child: Text(
-            '4/10/2024',
+            '4/18/2024',
             style: TextStyle(color: Colors.black, fontSize: 16),
           ),
         )

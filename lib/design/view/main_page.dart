@@ -32,13 +32,19 @@ class MainPage extends StatelessWidget {
                   label: 'Home'),
               BottomNavigationBarItem(
                 icon: Icon(
-                  IconBroken.Chart,
+                  Icons.medical_information_outlined,
                 ),
-                label: 'History',
+                label: 'Info',
               ),
               BottomNavigationBarItem(
                 icon: Icon(IconBroken.Chat),
                 label: 'ChatBot',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  IconBroken.Chart,
+                ),
+                label: 'History',
               ),
               BottomNavigationBarItem(
                 icon: Icon(

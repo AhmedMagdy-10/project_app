@@ -4,12 +4,12 @@ import 'package:project_app/constants/constant.dart';
 class OtherPharse extends StatelessWidget {
   const OtherPharse({
     super.key,
-    required this.titleOfPharse,
-    required this.bodyOfPharse,
+    this.titleOfPharse,
+    this.bodyOfPharse,
   });
 
-  final String bodyOfPharse;
-  final String titleOfPharse;
+  final String? bodyOfPharse;
+  final String? titleOfPharse;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,10 @@ class OtherPharse extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                titleOfPharse,
-                textAlign: TextAlign.right,
+                titleOfPharse ?? "_",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.start,
                 style: const TextStyle(
                   fontSize: 15,
                   height: 1.7,
@@ -31,16 +33,18 @@ class OtherPharse extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              Container(
-                width: 5,
-                height: 20,
-                color: secondColor,
-              ),
+              if (titleOfPharse != "_")
+                Container(
+                  width: 5,
+                  height: 20,
+                  color: secondColor,
+                ),
             ],
           ),
           Text(
-            bodyOfPharse,
+            bodyOfPharse ?? '',
             textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
             style: const TextStyle(
               fontSize: 15,
               height: 1.7,

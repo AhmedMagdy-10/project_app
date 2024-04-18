@@ -13,8 +13,10 @@ class ElementAffect extends StatelessWidget {
         scrolledUnderElevation: 0,
         title: const Text(
           'العوامل المؤثرة في معدل نبضات القلب',
+          textAlign: TextAlign.right,
+          maxLines: 2,
           style: TextStyle(
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w800,
           ),
         ),
       ),

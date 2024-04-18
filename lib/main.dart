@@ -1,18 +1,10 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_app/constants/cache.dart';
-import 'package:project_app/constants/constant.dart';
 import 'package:project_app/core/helper/cache_helper.dart';
 import 'package:project_app/core/helper/dio_helper.dart';
 import 'package:project_app/core/helper/observer.dart';
-import 'package:project_app/design/view/chat_view.dart';
-import 'package:project_app/design/view/inforamtion_view.dart';
-import 'package:project_app/design/view/login_view.dart';
-import 'package:project_app/design/view/main_page.dart';
-import 'package:project_app/design/view/measure_view.dart';
-import 'package:project_app/design/view/register_view.dart';
 import 'package:project_app/design/view/splash_view.dart';
 import 'package:project_app/firebase_options.dart';
 import 'package:project_app/logic/cubit/auth_cubit/auth_cubit.dart';
@@ -60,7 +52,7 @@ class MyApp extends StatelessWidget {
           ),
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: const InformationView(),
+        home: const SplashView(),
       ),
     );
   }

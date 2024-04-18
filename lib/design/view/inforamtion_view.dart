@@ -15,10 +15,36 @@ class InformationView extends StatelessWidget {
             ),
           ),
         ),
-        body: Container(
-          color: Colors.blue,
-          child: Column(
-            children: [Image.asset('assets/images/blood-pressure.png')],
+        body: InkWell(
+          onTap: () {},
+          child: Container(
+            height: 250,
+            width: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.cyan,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    'assets/images/blood-pressure.png',
+                    width: 100,
+                    height: 150,
+                  ),
+                  const Text(
+                    'ما هو معدل نبضات القلب ',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ));
   }

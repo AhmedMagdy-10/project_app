@@ -8,6 +8,7 @@ import 'package:project_app/core/helper/cache_helper.dart';
 import 'package:project_app/core/helper/dio_helper.dart';
 import 'package:project_app/core/helper/observer.dart';
 import 'package:project_app/design/view/chat_view.dart';
+import 'package:project_app/design/view/inforamtion_view.dart';
 import 'package:project_app/design/view/login_view.dart';
 import 'package:project_app/design/view/main_page.dart';
 import 'package:project_app/design/view/measure_view.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
           ),
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: const SplashView(),
+        home: const InformationView(),
       ),
     );
   }

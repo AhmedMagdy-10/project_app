@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/constants/constant.dart';
-import 'package:project_app/design/view/inforamtion_page/other_pharse.dart';
+import 'package:project_app/design/view/inforamtion_page/widgett/other_pharse.dart';
 import 'package:project_app/design/view/inforamtion_page/widgett/pharse_one.dart';
 
 class WhatHeartRate extends StatelessWidget {
@@ -18,12 +18,12 @@ class WhatHeartRate extends StatelessWidget {
           ),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              PharseOne(
+              const PharseOne(
                 pharseOneTitle:
                     'معدل ضربات القلب ، أو النبض ، هو عدد ضربات قلبك لكل '
                     'وحدة زمنية ، وعادة ما تكون دقيقة. '
@@ -37,36 +37,47 @@ class WhatHeartRate extends StatelessWidget {
                     'استخدام الآخر لمعرفة معدل ضربات القلب المستهدف المثالي '
                     'أثناء التمرين',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              OtherPharse(
-                titleOfPharse: ' :  نطاقات معدل ضربات القلب أثناء الراحة  ',
-                bodyOfPharse:
-                    'الأطفال من سنة إلى سنتين): 80 إلى 130 نبضة في الدقيقة\n'
-                    'الأطفال من 3 إلى 4 سنوات): 80 إلى 120 نبضة في الدقيقة\n'
-                    'الأطفال من 5 إلى 6 سنوات) : 75 إلى 115 نبضة في الدقيقة\n'
-                    'الأطفال من 7 إلى 9 سنوات): 70 إلى 110 نبضة في الدقيقة\n'
-                    'الأطفال من 10 إلى 15 سنة): 70 إلى 100 نبضة في الدقيقة\n'
-                    'الناس (فوق 15 سنة): 60 إلى 100 نبضة في الدقيقة',
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              OtherPharse(
-                  titleOfPharse: 'نطاقات شدة التمرين :',
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: kprimaryColor,
+                ),
+                child: const OtherPharse(
+                  titleOfPharse: ' :  نطاقات معدل ضربات القلب أثناء الراحة  ',
                   bodyOfPharse:
-                      'أثناء التمرين ، يمكنك رؤية شدة تدريبك عن طريق معدل ضربات القلب المستهدف. '
-                      'فيما يلي نطاقات معدل ضربات القلب المستهدفة وفقًا لذلك:\n'
-                      '\n'
-                      'الإحماء: <60% من HRmax\n'
-                      'التدريب المستهدف: 60% - 79% من HRmax\n'
-                      'كثافة عالية: 80% - 89% من HRmax\n'
-                      'متطرف = 90% من أقصى معدل لضربات القلب\n'
-                      '\n'
-                      'يرجى ملاحظة أنه لا يمكن استخدام تطبيقنا كبديل لخدمات الرعاية الصحية الاحترافية ، '
-                      'إذا كان لديك تسارع مستمر في ضربات القلب أو أي مشاكل أخرى في معدل ضربات القلب ، '
-                      'فمن الضروري استشارة طبيبك في الوقت المناسب.')
+                      'الأطفال من سنة إلى سنتين): 80 إلى 130 نبضة في الدقيقة\n'
+                      'الأطفال من 3 إلى 4 سنوات): 80 إلى 120 نبضة في الدقيقة\n'
+                      'الأطفال من 5 إلى 6 سنوات) : 75 إلى 115 نبضة في الدقيقة\n'
+                      'الأطفال من 7 إلى 9 سنوات): 70 إلى 110 نبضة في الدقيقة\n'
+                      'الأطفال من 10 إلى 15 سنة): 70 إلى 100 نبضة في الدقيقة\n'
+                      'الناس (فوق 15 سنة): 60 إلى 100 نبضة في الدقيقة',
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: kprimaryColor),
+                child: const OtherPharse(
+                    titleOfPharse: 'نطاقات شدة التمرين :',
+                    bodyOfPharse:
+                        'أثناء التمرين ، يمكنك رؤية شدة تدريبك عن طريق معدل ضربات القلب المستهدف. '
+                        'فيما يلي نطاقات معدل ضربات القلب المستهدفة وفقًا لذلك:\n'
+                        '\n'
+                        'الإحماء: <60% من HRmax\n'
+                        'التدريب المستهدف: 60% - 79% من HRmax\n'
+                        'كثافة عالية: 80% - 89% من HRmax\n'
+                        'متطرف = 90% من أقصى معدل لضربات القلب\n'
+                        '\n'
+                        'يرجى ملاحظة أنه لا يمكن استخدام تطبيقنا كبديل لخدمات الرعاية الصحية الاحترافية ، '
+                        'إذا كان لديك تسارع مستمر في ضربات القلب أو أي مشاكل أخرى في معدل ضربات القلب ، '
+                        'فمن الضروري استشارة طبيبك في الوقت المناسب.'),
+              )
             ],
           ),
         ),

@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:project_app/constants/constant.dart';
 import 'package:project_app/core/helper/show_toast_state.dart';
+import 'package:project_app/design/Mohmed/general_info_page.dart';
+import 'package:project_app/design/Mohmed/health_care_page.dart';
+import 'package:project_app/design/Mohmed/mo_widgets/finl_circular_images.dart';
 import 'package:project_app/design/view/widgets/action_button.dart';
 import 'package:project_app/design/view/widgets/custom_button.dart';
 import 'package:project_app/design/view/widgets/custom_user_info.dart';
@@ -226,10 +229,17 @@ class MeasureViewState extends State<MeasureView> {
                           children: [
                             CustomActionButton(
                               onTap: () {
-                                Future.delayed(const Duration(seconds: 10), () {
-                                  BlocProvider.of<MainCubit>(context)
-                                      .sendNotification();
-                                });
+                                // Future.delayed(const Duration(seconds: 10), () {
+                                //   BlocProvider.of<MainCubit>(context)
+                                //       .sendNotification();
+                                // });
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HealthCrePage(),
+                                    ));
                               },
                               child: const Center(
                                 child: Text(
@@ -243,7 +253,14 @@ class MeasureViewState extends State<MeasureView> {
                               ),
                             ),
                             CustomActionButton(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const GneteralFoodInfo(),
+                                    ));
+                              },
                               child: const Center(
                                 child: Text(
                                   'Food Details 🥗',

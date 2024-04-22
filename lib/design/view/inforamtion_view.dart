@@ -10,7 +10,7 @@ class InformationView extends StatelessWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: const Text(
-          'Impotant Informatoin',
+          'Improtant Information',
           style: TextStyle(
             fontWeight: FontWeight.w800,
           ),

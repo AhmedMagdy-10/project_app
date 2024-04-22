@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_app/constants/icon_broken.dart';
 import 'package:project_app/core/helper/cache_helper.dart';
 import 'package:project_app/core/helper/show_toast_state.dart';
+import 'package:project_app/design/view/login_view.dart';
 import 'package:project_app/design/view/widgets/custom_button.dart';
 import 'package:project_app/design/view/widgets/profile_feature_item.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_cubit.dart';
@@ -87,10 +86,8 @@ class ProfileView extends StatelessWidget {
                                     BlocProvider.of<MainCubit>(context)
                                         .getProfileImage()
                                         .then((_) {
-                                      if (state is GetProfileImageSuccess) {
-                                        BlocProvider.of<MainCubit>(context)
-                                            .upDateProfileImage();
-                                      }
+                                      BlocProvider.of<MainCubit>(context)
+                                          .upDateProfileImage();
                                     });
                                   },
                                   icon: const CircleAvatar(
@@ -181,8 +178,15 @@ class ProfileView extends StatelessWidget {
                       ],
                     ),
                     onTapButton: () {
-                      CacheHelper.removeData(key: 'uId');
-                      exit(0);
+                      CacheHelper.removeData(key: 'uId').then((value) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginView(),
+                            ));
+                      });
+
+                      // exit(0);
                     },
                   )
                 ],

@@ -24,9 +24,10 @@ class RegisterView extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SuccessRegisterState) {
-          return showToast(
-              text: 'Create Account Successflly,يكون فتحت الخير عليك ',
+          showToast(
+              text: 'Create Account Successflly,login Now',
               state: ToastStates.success);
+          Navigator.pop(context);
         } else if (state is FailureRegisterState) {
           return showToast(text: state.errorMassage, state: ToastStates.error);
         }

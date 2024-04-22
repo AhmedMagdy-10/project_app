@@ -133,7 +133,8 @@ class LoginView extends StatelessWidget {
                           height: 30,
                         ),
                         CustomButton(
-                            child: state is LoadingLoginState
+                            child: state is LoadingLoginState ||
+                                    state is FailureLoginState
                                 ? const CircularProgressIndicator(
                                     color: Colors.white,
                                   )

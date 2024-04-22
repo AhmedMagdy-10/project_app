@@ -27,7 +27,7 @@ class ChatBotCubit extends Cubit<ChatBotStates> {
   }
 
   Future<void> chatBotMassage(String message, String dateTime) async {
-    const apiKey = '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';
+    const apiKey = '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';
 
     const url = 'https://api.openai.com/v1/chat/completions';
 

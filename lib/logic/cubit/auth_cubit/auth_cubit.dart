@@ -83,8 +83,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(FailureRegisterState(
             errorMassage: 'The password provided is too weak.'));
       } else if (e.code == 'email-already-in-use') {
-        emit(FailureRegisterState(
-            errorMassage: 'الاكونت ده حد خده والله يصاحبي'));
+        emit(FailureRegisterState(errorMassage: 'This Email Already Exist'));
       }
     } catch (e) {
       emit(FailureRegisterState(
@@ -106,7 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
       uId: uId,
       age: age,
       image:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhWhlPoW4Wpg8W4Mt5tD3d7eWnppCu-v4u9Q&usqp=CAU',
+          'https://i.pinimg.com/564x/3d/ac/15/3dac1508432e51703ff98c091d7a221e.jpg',
     );
 
     FirebaseFirestore.instance

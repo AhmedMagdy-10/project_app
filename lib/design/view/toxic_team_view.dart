@@ -18,7 +18,7 @@ class ToxicTeamView extends StatelessWidget {
           appBar: AppBar(
             scrolledUnderElevation: 0,
             title: const Text(
-              'Team Without Work',
+              'Work Team',
               style: TextStyle(
                 fontWeight: FontWeight.w800,
               ),
@@ -86,7 +86,8 @@ class TeamMemmberFeature extends StatelessWidget {
                   ),
               ],
             ),
-            if (userModel.name == 'Ahmed Magdy')
+            if (userModel.name == 'Ahmed Magdy' ||
+                userModel.name == 'Mohamed Hussien')
               const Text(
                 'Flutter Developer',
                 maxLines: 1,
@@ -109,6 +110,16 @@ class TeamMemmberFeature extends StatelessWidget {
                 userModel.name == 'Hagar Saleh')
               const Text(
                 'Hardware',
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+            if (userModel.name == 'Dr Noahman' ||
+                userModel.name == 'Noahman Mohmed')
+              const Text(
+                'Supervisor',
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 16,

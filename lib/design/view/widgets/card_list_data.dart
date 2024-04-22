@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/constants/constant.dart';
+import 'package:project_app/design/view/inforamtion_page/emergency_heigh.dart';
 import 'package:project_app/design/view/inforamtion_page/emergeny_low.dart';
 import 'package:project_app/design/view/inforamtion_page/mis_understanding.dart';
 import 'package:project_app/design/view/inforamtion_page/normal_heart.dart';
@@ -89,7 +90,7 @@ class CardListData2 extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ElementAffect(),
+                builder: (context) => const EmergenyHeigh(),
               ));
         },
         text: 'إرشادات أزمة ارتفاع ضغط الدم',
@@ -151,7 +152,7 @@ class CardListData3 extends StatelessWidget {
       InformatoinContainerModel(
         onTap: () {},
         text: 'التغذيه',
-        image: ' assets/images/diet.png',
+        image: 'assets/images/diet.png',
         color: Color.fromARGB(255, 194, 99, 211),
       ),
     ];

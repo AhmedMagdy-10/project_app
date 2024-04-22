@@ -26,8 +26,7 @@ String? validatorInput(String value, String type, int min, int max) {
   }
 
   if (value.isEmpty) {
-    return "املي الحقول دي يمحترم";
-    // "Field can't be empty";
+    return "Field can't be empty";
   }
 
   if (value.length < min) {

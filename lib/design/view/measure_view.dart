@@ -182,7 +182,7 @@ class MeasureViewState extends State<MeasureView> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Eye Contact ',
+                                      'connection',
                                       style: TextStyle(
                                         fontSize: 17,
                                         color: Colors.black,

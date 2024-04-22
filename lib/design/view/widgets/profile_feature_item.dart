@@ -90,7 +90,7 @@ class FeatureItemList extends StatelessWidget {
               ),
               const Expanded(
                 child: Text(
-                  'Toxic Team',
+                  'Work Team',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

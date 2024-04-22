@@ -3,8 +3,8 @@ import 'package:project_app/constants/constant.dart';
 import 'package:project_app/design/view/inforamtion_page/widgett/other_pharse.dart';
 import 'package:project_app/design/view/inforamtion_page/widgett/pharse_one.dart';
 
-class EmergenyLow extends StatelessWidget {
-  const EmergenyLow({super.key});
+class EmergenyHeigh extends StatelessWidget {
+  const EmergenyHeigh({super.key});
 
   @override
   Widget build(BuildContext context) {

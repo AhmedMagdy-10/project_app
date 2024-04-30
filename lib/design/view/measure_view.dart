@@ -1,18 +1,22 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:intl/intl.dart';
 import 'package:project_app/constants/constant.dart';
 import 'package:project_app/core/helper/show_toast_state.dart';
 import 'package:project_app/design/Mohmed/general_info_page.dart';
 import 'package:project_app/design/Mohmed/health_care_page.dart';
-import 'package:project_app/design/Mohmed/mo_widgets/finl_circular_images.dart';
 import 'package:project_app/design/view/widgets/action_button.dart';
+import 'package:project_app/design/view/widgets/bar_chart_sample.dart';
 import 'package:project_app/design/view/widgets/custom_button.dart';
 import 'package:project_app/design/view/widgets/custom_user_info.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_cubit.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_states.dart';
+import 'package:project_app/logic/cubit/rate_note_cubit/add_note_cubit.dart';
+import 'package:project_app/logic/data/models/rate_model.dart';
 
 class MeasureView extends StatefulWidget {
   const MeasureView({super.key});
@@ -22,7 +26,9 @@ class MeasureView extends StatefulWidget {
 }
 
 class MeasureViewState extends State<MeasureView> {
-  String receivedMessage = '';
+  final addNoteCubit = AddNoteCubit();
+  String? receivedMessage = '';
+
   bool isSendingData = false;
   BluetoothConnection? connection;
   bool isConnected = false;
@@ -72,7 +78,6 @@ class MeasureViewState extends State<MeasureView> {
       setState(() {
         isSendingData = true;
       });
-
       connection!.output.add(utf8.encode(data));
       connection!.output.allSent.then((_) {
         print('Sent message: $data');
@@ -97,6 +102,8 @@ class MeasureViewState extends State<MeasureView> {
 
   void disconnectFromESP32() {
     if (connection != null && isConnected) {
+      // Cancel the input subscription before disconnecting
+
       connection!.finish();
       setState(() {
         connection = null;
@@ -104,6 +111,38 @@ class MeasureViewState extends State<MeasureView> {
       });
       print('Disconnected from ESP32');
     }
+  }
+
+  static const maxSeconds = 60;
+  int seconds = maxSeconds;
+
+  Timer? timer;
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      timer!.isActive;
+      if (seconds > 0) {
+        setState(() {
+          seconds--;
+        });
+      }
+      if (seconds == 0) {
+        setState(() {
+          seconds;
+          stopTimer();
+        });
+      }
+    });
+  }
+
+  void stopTimer() {
+    timer?.cancel();
+  }
+
+  @override
+  void dispose() {
+    addNoteCubit.close();
+    super.dispose();
   }
 
   @override
@@ -126,50 +165,13 @@ class MeasureViewState extends State<MeasureView> {
                   child: Center(
                     child: Column(
                       children: [
-                        Image.asset(
-                          'assets/images/graph.png',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: 180,
+                        BuildTimer(
+                          receivedValue: receivedMessage ?? 'Rate',
+                          seconds: seconds,
+                          maxSecond: maxSeconds,
                         ),
-                        isSendingData
-                            ? const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircularProgressIndicator(
-                                    color: Colors.blue,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text('الصبر جميل',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ))
-                                ],
-                              )
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                    Text(
-                                      receivedMessage,
-                                      style: const TextStyle(
-                                        fontSize: 35,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Bp/m',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.grey[600],
-                                      ),
-                                    ),
-                                  ]),
                         const SizedBox(
-                          height: 20,
+                          height: 50,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,11 +231,6 @@ class MeasureViewState extends State<MeasureView> {
                           children: [
                             CustomActionButton(
                               onTap: () {
-                                // Future.delayed(const Duration(seconds: 10), () {
-                                //   BlocProvider.of<MainCubit>(context)
-                                //       .sendNotification();
-                                // });
-
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -277,11 +274,22 @@ class MeasureViewState extends State<MeasureView> {
                         const SizedBox(
                           height: 35,
                         ),
+                        // CustomButton(
+                        // onTapButton: () {
+
+                        //   sendData('start', (receivedValue) {
+                        //     setState(() {
+                        //       this.receivedValue = receivedValue;
+                        //       // startTimer();
+                        //     });
+                        //   });
+                        // },
                         CustomButton(
                           onTapButton: () {
                             sendData('start', (receivedMessage) {
                               setState(() {
                                 this.receivedMessage = receivedMessage;
+                                startTimer();
                               });
                             });
                           },
@@ -289,7 +297,7 @@ class MeasureViewState extends State<MeasureView> {
                             'Start Measure',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 18,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

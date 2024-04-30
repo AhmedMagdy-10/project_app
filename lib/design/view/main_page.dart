@@ -41,6 +41,10 @@ class MainPage extends StatelessWidget {
                 label: 'ChatBot',
               ),
               BottomNavigationBarItem(
+                icon: Icon(IconBroken.Location),
+                label: 'Location',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(
                   IconBroken.Chart,
                 ),

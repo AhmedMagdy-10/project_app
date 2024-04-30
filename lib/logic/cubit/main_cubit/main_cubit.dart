@@ -15,6 +15,7 @@ import 'package:project_app/core/helper/show_toast_state.dart';
 import 'package:project_app/design/view/chat_view.dart';
 import 'package:project_app/design/view/history_view.dart';
 import 'package:project_app/design/view/inforamtion_view.dart';
+import 'package:project_app/design/view/map_page.dart';
 import 'package:project_app/design/view/measure_view.dart';
 import 'package:project_app/design/view/profile_view.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_states.dart';
@@ -107,6 +108,7 @@ class MainCubit extends Cubit<MainCubitStates> {
     const MeasureView(),
     const InformationView(),
     const ChatBot(),
+    const GoogleMapView(),
     const HistoryView(),
     const ProfileView(),
   ];

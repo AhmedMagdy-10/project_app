@@ -19,7 +19,10 @@ import 'package:project_app/design/view/map_page.dart';
 import 'package:project_app/design/view/measure_view.dart';
 import 'package:project_app/design/view/profile_view.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_states.dart';
+import 'package:project_app/logic/cubit/map_cubit/map_cubit.dart';
 import 'package:project_app/logic/data/models/user_model.dart';
+import 'package:project_app/logic/data/repository/map_repo.dart';
+import 'package:project_app/logic/data/webservices/places_web_services.dart';
 
 class MainCubit extends Cubit<MainCubitStates> {
   MainCubit() : super(MainInitailStates());
@@ -108,7 +111,11 @@ class MainCubit extends Cubit<MainCubitStates> {
     const MeasureView(),
     const InformationView(),
     const ChatBot(),
-    const GoogleMapView(),
+    BlocProvider<GoogleMapCubit>(
+      create: (context) =>
+          GoogleMapCubit(MapRepository(placesMapServices: PlacesMapServices())),
+      child: const GoogleMapView(),
+    ),
     const HistoryView(),
     const ProfileView(),
   ];

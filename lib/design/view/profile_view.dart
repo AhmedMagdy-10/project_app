@@ -6,7 +6,9 @@ import 'package:project_app/core/helper/cache_helper.dart';
 import 'package:project_app/core/helper/show_toast_state.dart';
 import 'package:project_app/design/view/login_view.dart';
 import 'package:project_app/design/view/widgets/custom_button.dart';
-import 'package:project_app/design/view/widgets/profile_feature_item.dart';
+import 'package:project_app/design/view/widgets/custom_text_form_field.dart';
+
+import 'package:project_app/design/view/widgets/reused_form_field.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_cubit.dart';
 import 'package:project_app/logic/cubit/main_cubit/main_states.dart';
 
@@ -15,6 +17,12 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var nameController = TextEditingController();
+    var phoneController = TextEditingController();
+    var emailController = TextEditingController();
+    var ageController = TextEditingController();
+    var emergencyNumController = TextEditingController();
+    var genderController = TextEditingController();
     return BlocConsumer<MainCubit, MainCubitStates>(listener: (context, state) {
       if (state is UploadImageErrorState) {
         return showToast(text: state.error, state: ToastStates.error);
@@ -25,6 +33,13 @@ class ProfileView extends StatelessWidget {
       }
     }, builder: (context, state) {
       var userModel = BlocProvider.of<MainCubit>(context).userModel;
+      nameController.text = userModel!.name;
+      ageController.text = userModel.age;
+      emailController.text = userModel.email;
+      phoneController.text = userModel.phone;
+      genderController.text = userModel.gender;
+      emergencyNumController.text = userModel.emergencyNum;
+
       // var profileImage = ;
       if (userModel != null) {
         return Scaffold(
@@ -100,49 +115,58 @@ class ProfileView extends StatelessWidget {
                                       )))
                             ],
                           ),
-                          Column(
+                          const Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    userModel.name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  if (userModel.name == 'Ahmed Magdy')
-                                    const Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        CircleAvatar(
-                                          backgroundColor: Colors.blue,
-                                          radius: 7,
-                                          child: Icon(
-                                            Icons.check,
-                                            color: Colors.white,
-                                            size: 13,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                ],
-                              ),
                               Text(
-                                userModel.email,
+                                'User Information',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 17,
+                                style: TextStyle(
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       userModel.name,
+                              //       maxLines: 1,
+                              //       overflow: TextOverflow.ellipsis,
+                              //       style: const TextStyle(
+                              //         fontSize: 17,
+                              //         fontWeight: FontWeight.w700,
+                              //       ),
+                              //     ),
+
+                              //       // const Row(
+                              //       //   children: [
+                              //       //     SizedBox(
+                              //       //       width: 5,
+                              //       //     ),
+                              //       //     CircleAvatar(
+                              //       //       backgroundColor: Colors.blue,
+                              //       //       radius: 7,
+                              //       //       child: Icon(
+                              //       //         Icons.check,
+                              //       //         color: Colors.white,
+                              //       //         size: 13,
+                              //       //       ),
+                              //       //     ),
+                              //       //   ],
+                              //       // ),
+                              //   ],
+                              // ),
+                              // Text(
+                              //   userModel.email,
+                              //   maxLines: 1,
+                              //   overflow: TextOverflow.ellipsis,
+                              //   style: const TextStyle(
+                              //     fontSize: 17,
+                              //     fontWeight: FontWeight.w700,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ],
@@ -152,9 +176,51 @@ class ProfileView extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const FeatureItemList(),
+                  CustomTextFormField(
+                    controller: nameController,
+                    label: const Text('Name'),
+                    prefixIcon: IconBroken.User,
+                  ),
                   const SizedBox(
-                    height: 16,
+                    height: 15,
+                  ),
+                  CustomTextFormField(
+                    controller: ageController,
+                    label: const Text('Age'),
+                    prefixIcon: IconBroken.Calendar,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextFormField(
+                      label: const Text('Email'),
+                      controller: emailController,
+                      prefixIcon: IconBroken.Paper),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextFormField(
+                    label: const Text('Phone'),
+                    controller: phoneController,
+                    prefixIcon: Icons.phone_android_outlined,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextFormField(
+                      label: const Text('Gender'),
+                      controller: genderController,
+                      prefixIcon: Icons.male_outlined),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextFormField(
+                    label: const Text('Emergency Number'),
+                    controller: emergencyNumController,
+                    prefixIcon: IconBroken.Calling,
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   CustomButton(
                     child: const Row(

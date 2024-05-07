@@ -168,12 +168,15 @@ class MainCubit extends Cubit<MainCubitStates> {
 
   void updateUser({String? image}) {
     UserModel model = UserModel(
-        name: userModel!.name,
-        email: userModel!.email,
-        phone: userModel!.phone,
-        uId: userModel!.uId,
-        image: image ?? userModel!.image,
-        age: userModel!.age);
+      name: userModel!.name,
+      email: userModel!.email,
+      phone: userModel!.phone,
+      uId: userModel!.uId,
+      image: image ?? userModel!.image,
+      age: userModel!.age,
+      gender: userModel!.gender,
+      emergencyNum: userModel!.emergencyNum,
+    );
     emit(UpdateUserDataLoading());
     FirebaseFirestore.instance
         .collection('users')

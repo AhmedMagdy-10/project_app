@@ -92,6 +92,15 @@ class MeasureViewState extends State<MeasureView> {
         String message = String.fromCharCodes(data);
         print('Received message: $message');
         onReceivedMessage(message); // Call the callback function
+
+        if (receivedMessage != null) {
+          final currentDate = DateTime.now();
+          final formateTime =
+              DateFormat('MMMM.dd h:mm aaa').format(currentDate);
+          final rate =
+              RateModel(rate: receivedMessage as int, date: formateTime);
+          addNoteCubit.addNote(rate);
+        }
       }).onDone(() {
         disconnectFromESP32();
       });
@@ -274,16 +283,6 @@ class MeasureViewState extends State<MeasureView> {
                         const SizedBox(
                           height: 35,
                         ),
-                        // CustomButton(
-                        // onTapButton: () {
-
-                        //   sendData('start', (receivedValue) {
-                        //     setState(() {
-                        //       this.receivedValue = receivedValue;
-                        //       // startTimer();
-                        //     });
-                        //   });
-                        // },
                         CustomButton(
                           onTapButton: () {
                             sendData('start', (receivedMessage) {

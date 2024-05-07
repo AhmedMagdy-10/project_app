@@ -5,6 +5,8 @@ class UserModel {
   late String uId;
   late String image;
   late String age;
+  late String gender;
+  late String emergencyNum;
 
   UserModel({
     required this.name,
@@ -13,6 +15,8 @@ class UserModel {
     required this.uId,
     required this.image,
     required this.age,
+    required this.gender,
+    required this.emergencyNum,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> jsonData) {
@@ -23,6 +27,8 @@ class UserModel {
       uId: jsonData['uId'],
       image: jsonData['image'],
       age: jsonData['age'],
+      gender: jsonData['gender'],
+      emergencyNum: jsonData['emergencyNum'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -33,6 +39,8 @@ class UserModel {
       'uId': uId,
       'image': image,
       'age': age,
+      'gender': gender,
+      'emergencyNum': emergencyNum,
     };
   }
 }

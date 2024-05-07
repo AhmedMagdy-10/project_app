@@ -65,6 +65,8 @@ class AuthCubit extends Cubit<AuthState> {
     required String phone,
     required String userName,
     required String age,
+    required String gender,
+    required String emergencyNum,
   }) async {
     emit(LoadingRegisterState());
     try {
@@ -72,11 +74,14 @@ class AuthCubit extends Cubit<AuthState> {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         createUser(
-            name: userName,
-            phone: phone,
-            email: email,
-            uId: value.user!.uid,
-            age: age);
+          name: userName,
+          phone: phone,
+          email: email,
+          uId: value.user!.uid,
+          age: age,
+          gender: gender,
+          emergencyNum: emergencyNum,
+        );
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -97,6 +102,8 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String uId,
     required String age,
+    required String gender,
+    required String emergencyNum,
   }) {
     UserModel userModel = UserModel(
       name: name,
@@ -104,6 +111,8 @@ class AuthCubit extends Cubit<AuthState> {
       phone: phone,
       uId: uId,
       age: age,
+      gender: gender,
+      emergencyNum: emergencyNum,
       image:
           'https://i.pinimg.com/564x/3d/ac/15/3dac1508432e51703ff98c091d7a221e.jpg',
     );

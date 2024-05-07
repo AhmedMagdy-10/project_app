@@ -5,18 +5,22 @@ class CustomTextFormField extends StatelessWidget {
       {super.key,
       required this.controller,
       this.onSubmitted,
-      required this.validator,
+      this.validator,
       this.suffIcon,
       this.prefixIcon,
       this.hintText,
       required this.label,
       this.secure = false,
       this.onPressedSuffixIcon,
-      this.keyboardType});
+      this.keyboardType,
+      this.suffIconColor,
+      this.enabledBordercolors});
   final TextEditingController controller;
   final void Function(String)? onSubmitted;
   final String? Function(String?)? validator;
   final IconData? suffIcon;
+  final Color? suffIconColor;
+  final Color? enabledBordercolors;
   final IconData? prefixIcon;
   final Widget? label;
 
@@ -37,8 +41,9 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
+            fontSize: 16,
+            color: Colors.red,
+            fontWeight: FontWeight.w600,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding:
@@ -62,12 +67,12 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
           label: label,
+          labelStyle: const TextStyle(
+            fontSize: 17,
+          ),
           suffixIcon: IconButton(
             onPressed: onPressedSuffixIcon,
-            icon: Icon(
-              suffIcon,
-              color: Colors.grey,
-            ),
+            icon: Icon(suffIcon, color: suffIconColor ?? Colors.grey),
             padding: EdgeInsets.zero,
           ),
           prefixIcon: Icon(

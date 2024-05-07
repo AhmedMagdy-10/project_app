@@ -21,6 +21,9 @@ class RegisterView extends StatelessWidget {
     final TextEditingController userController = TextEditingController();
     final TextEditingController phoneController = TextEditingController();
     final TextEditingController ageController = TextEditingController();
+    final TextEditingController genderController = TextEditingController();
+    final TextEditingController emergencyNumController =
+        TextEditingController();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SuccessRegisterState) {
@@ -166,15 +169,51 @@ class RegisterView extends StatelessWidget {
                         ),
                         CustomTextFormField(
                           keyboardType: TextInputType.phone,
-                          prefixIcon: Icons.phone_android,
+                          prefixIcon: Icons.phone_android_outlined,
                           controller: phoneController,
                           hintText: 'enter your phone',
                           validator: (data) {
                             return validatorInput(
-                                data!, passwordController.text, 5, 50);
+                                data!, passwordController.text, 11, 12);
                           },
                           label: const Text(
                             'Phone number',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField(
+                          keyboardType: TextInputType.text,
+                          prefixIcon: Icons.merge_type_rounded,
+                          controller: genderController,
+                          hintText: 'enter your gender',
+                          validator: (data) {
+                            return validatorInput(
+                                data!, passwordController.text, 4, 60);
+                          },
+                          label: const Text(
+                            'Gender',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField(
+                          keyboardType: TextInputType.phone,
+                          prefixIcon: IconBroken.Calling,
+                          suffIcon: IconBroken.Danger,
+                          suffIconColor: Colors.red,
+                          controller: emergencyNumController,
+                          hintText: 'enter Emergency Number',
+                          validator: (data) {
+                            return validatorInput(
+                                data!, passwordController.text, 11, 12);
+                          },
+                          label: const Text(
+                            'Emergency number',
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -185,11 +224,14 @@ class RegisterView extends StatelessWidget {
                           onTapButton: () {
                             if (formKey.currentState!.validate()) {
                               BlocProvider.of<AuthCubit>(context).registerUser(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  phone: phoneController.text,
-                                  userName: userController.text,
-                                  age: ageController.text);
+                                email: emailController.text,
+                                password: passwordController.text,
+                                phone: phoneController.text,
+                                userName: userController.text,
+                                age: ageController.text,
+                                gender: genderController.text,
+                                emergencyNum: emergencyNumController.text,
+                              );
                             }
                           },
                           child: state is LoadingRegisterState
